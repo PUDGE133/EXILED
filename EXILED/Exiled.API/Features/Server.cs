@@ -11,8 +11,6 @@ namespace Exiled.API.Features
     using System.Collections.Generic;
     using System.Reflection;
 
-    using Exiled.API.Enums;
-
     using GameCore;
 
     using Interfaces;
@@ -176,6 +174,15 @@ namespace Exiled.API.Features
         {
             get => CustomNetworkManager.slots;
             set => CustomNetworkManager.slots = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the number of spare slots.
+        /// </summary>
+        public static int ReservedSlots
+        {
+            get => CustomNetworkManager.reservedSlots;
+            set => CustomNetworkManager.reservedSlots = value;
         }
 
         /// <summary>

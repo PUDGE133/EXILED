@@ -143,7 +143,7 @@ namespace Exiled.API.Features.Items
         public new BaseFirearm Base { get; }
 
         /// <summary>
-        /// Gets a primaty magazine for current firearm.
+        /// Gets a primary magazine for current firearm.
         /// </summary>
         public PrimaryMagazine PrimaryMagazine { get; }
 
@@ -156,7 +156,7 @@ namespace Exiled.API.Features.Items
         public BarrelMagazine BarrelMagazine { get; }
 
         /// <summary>
-        /// Gets a primaty magazine for current firearm.
+        /// Gets a primary magazine for current firearm.
         /// </summary>
         public HitscanHitregModuleBase HitscanHitregModule { get; }
 
@@ -187,6 +187,36 @@ namespace Exiled.API.Features.Items
         {
             get => PrimaryMagazine.Ammo;
             set => PrimaryMagazine.Ammo = value;
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the magazine is attached from the weapon. Setter will attach the magazine, but it will be empty. Weapons that do not have a detachable magazine return false by default. For example, a revolver.
+        /// </summary>
+        public bool IsMagazineAttached
+        {
+            get
+            {
+                if (PrimaryMagazine is NormalMagazine normalMag)
+                    return normalMag.MagazineInserted;
+
+                // Weapons that do not have a detachable magazine return false by default. For example, a revolver.
+                return false;
+            }
+
+            set
+            {
+                if (PrimaryMagazine is NormalMagazine normalMag)
+                    normalMag.MagazineInserted = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the magazine is attached from the weapon.
+        /// </summary>
+        public bool IsMagazineDeattached
+        {
+            get => !IsMagazineAttached;
+            set => IsMagazineAttached = !value;
         }
 
         /// <summary>
